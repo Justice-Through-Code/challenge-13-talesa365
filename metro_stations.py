@@ -78,10 +78,8 @@ class BusStation(MetroStation):
     def add_route(self, route):
         self.routes.append(route)
     def remove_route(self, route):
-        try:
-            self.routes.remove(route)
-        except ValueError:
-            return
+         self.routes.remove(route)
+      
     def show_info(self):
         super().show_info()
         print(f'The following lines stop here: {self.routes}')

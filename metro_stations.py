@@ -39,8 +39,16 @@ class MetroStation:
 #   - Have an additional attribute called `lines` that is user-defined as a list during initialization.
 #       This will indicate which subway lines stop at the station (for example ['A', 'C'])
 #   - Override the show_info() method from MetroStation to display which subway lines stop there, in addition to the station_name and location
-
-
+class SubwayStation(MetroStation):
+    def __init__(self, station_name, location, lines):
+        super().__init__(station_name, location)
+        self.lines = lines
+    def show_info(self):
+        super().show_info()
+        self.display_lines()
+        
+    def display_lines(self):
+        print(f'The following lines stop here: {self.lines}')
 
 # 1.2 TODO: Using your `SubwayStation` class, instantiate a subway station with the info below. 
 # Then run the show_info() method.
@@ -49,7 +57,8 @@ class MetroStation:
 # station_name: '14th street'
 # location: '14th street and 7th avenue'
 # lines: ['1', '2', '3', 'L']
-
+station1 = SubwayStation('14th street', '14th street and 7th avenue', ['1', '2', '3', 'L'])
+station1.show_info()
 
 
 # 2.1 TODO: Using the `MetroStation` class below as the parent, make a child class called `BusStation`
@@ -62,7 +71,18 @@ class MetroStation:
 #   ^ both should take in a route to either add or remove from the list of routes, respectively.
 # - Override the show_info() method to display the bus routes in addition to the station name and location
 #   (NOTE: This means that the code in `MetroStation.show_info()` should still run in the `SubwayStation` code)      
-
+class BusStation(MetroStation):
+    def __init__(self, station_name, location, routes):
+        super().__init__(station_name, location)
+        self.routes = routes
+    def add_route(self, route):
+        self.routes.append(route)
+    def remove_route(self, route):
+         self.routes.remove(route)
+      
+    def show_info(self):
+        super().show_info()
+        print(f'The following lines stop here: {self.routes}')
 
 # 3.0 TODO: Using your `BusStation` class:
 # 3.1 Instantiate a bus station with the info below. 
@@ -73,3 +93,8 @@ class MetroStation:
 # station_name: 'NYC Megabus Stop'
 # location: '34th street and 12th avenue'
 # routes: ['Boston', 'DC', 'Philly']
+station = BusStation('NYC Megabus Stop','34th street and 12th avenue',['Boston', 'DC', 'Philly'])
+station.show_info()
+station.close_station()
+station.show_info()
+print(station)
